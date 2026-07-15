@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Apple 风格次按钮：暗灰 pill -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/apple_surface_alt" />
+    <corners android:radius="24dp" />
+</shape>

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/apple_bg"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_title"
+            android:textColor="@color/apple_text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:letterSpacing="-0.02"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- ═══ 基础信息 ═══ -->
+        <TextView
+            android:id="@+id/tvBasicLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="基础信息"
+            android:textColor="@color/apple_text_secondary"
+            android:textSize="14sp"
+            android:letterSpacing="-0.01"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="32dp" />
+
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="年龄"
+            android:textColor="@color/apple_text_primary"
+            android:textColorHint="@color/apple_text_tertiary"
+            android:inputType="number"
+            android:background="@drawable/bg_apple_input"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tvBasicLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/etHeight"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="身高（厘米）"
+            android:textColor="@color/apple_text_primary"
+            android:textColorHint="@color/apple_text_tertiary"
+            android:inputType="numberDecimal"
+            android:background="@drawable/bg_apple_input"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/etAge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="体重（公斤）"
+            android:textColor="@color/apple_text_primary"
+            android:textColorHint="@color/apple_text_tertiary"
+            android:inputType="numberDecimal"
+            android:background="@drawable/bg_apple_input"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/etHeight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp" />
+
+        <!-- ═══ 性别 ═══ -->
+        <TextView
+            android:id="@+id/tvGenderLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性别"
+            android:textColor="@color/apple_text_secondary"
+            android:textSize="14sp"
+            android:letterSpacing="-0.01"
+            app:layout_constraintTop_toBottomOf="@id/etWeight"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="28dp" />
+
+        <RadioGroup
+            android:id="@+id/rgGender"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tvGenderLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp">
+
+            <RadioButton
+                android:id="@+id/rbMale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="男"
+                android:textColor="@color/apple_text_primary"
+                android:textSize="15sp"
+                android:checked="true"
+                android:buttonTint="@color/apple_accent" />
+
+            <RadioButton
+                android:id="@+id/rbFemale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="女"
+                android:textColor="@color/apple_text_primary"
+                android:textSize="15sp"
+                android:buttonTint="@color/apple_accent" />
+        </RadioGroup>
+
+        <!-- ═══ 核心目标 ═══ -->
+        <TextView
+            android:id="@+id/tvGoalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="核心目标"
+            android:textColor="@color/apple_text_secondary"
+            android:textSize="14sp"
+            android:letterSpacing="-0.01"
+            app:layout_constraintTop_toBottomOf="@id/rgGender"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp" />
+
+        <RadioGroup
+            android:id="@+id/rgGoal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tvGoalLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp">
+
+            <RadioButton android:id="@+id/rbRecomp" android:text="减脂保肌（推荐）"
+                android:textColor="@color/apple_text_primary" android:textSize="15sp"
+                android:buttonTint="@color/apple_accent" android:checked="true"
+                android:layout_marginBottom="2dp" />
+            <RadioButton android:id="@+id/rbCut" android:text="减脂"
+                android:textColor="@color/apple_text_primary" android:textSize="15sp"
+                android:buttonTint="@color/apple_accent"
+                android:layout_marginBottom="2dp" />
+            <RadioButton android:id="@+id/rbBulk" android:text="增肌"
+                android:textColor="@color/apple_text_primary" android:textSize="15sp"
+                android:buttonTint="@color/apple_accent"
+                android:layout_marginBottom="2dp" />
+            <RadioButton android:id="@+id/rbMaintain" android:text="维持"
+                android:textColor="@color/apple_text_primary" android:textSize="15sp"
+                android:buttonTint="@color/apple_accent" />
+        </RadioGroup>
+
+        <!-- ═══ 促睾（仅男性） ═══ -->
+        <LinearLayout
+            android:id="@+id/layoutTestosterone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@id/rgGoal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="促睾强化（充足健康脂肪）"
+                android:textColor="@color/apple_text_secondary"
+                android:textSize="14sp"
+                android:letterSpacing="-0.01" />
+
+            <Switch
+                android:id="@+id/swTestosterone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:thumbTint="@color/apple_accent"
+                android:trackTint="@color/apple_surface_alt" />
+        </LinearLayout>
+
+        <!-- ═══ 活动水平 ═══ -->
+        <TextView
+            android:id="@+id/tvActivityLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="活动水平"
+            android:textColor="@color/apple_text_secondary"
+            android:textSize="14sp"
+            android:letterSpacing="-0.01"
+            app:layout_constraintTop_toBottomOf="@id/layoutTestosterone"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp" />
+
+        <Spinner
+            android:id="@+id/spActivity"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_apple_input"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tvActivityLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <!-- ═══ 器械多选 ═══ -->
+        <TextView
+            android:id="@+id/tvEquipLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="可用器械（可多选）"
+            android:textColor="@color/apple_text_secondary"
+            android:textSize="14sp"
+            android:letterSpacing="-0.01"
+            app:layout_constraintTop_toBottomOf="@id/spActivity"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp" />
+
+        <LinearLayout
+            android:id="@+id/equipContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tvEquipLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <!-- ═══ 计算结果 ═══ -->
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/apple_accent"
+            android:textSize="13sp"
+            android:letterSpacing="-0.01"
+            android:lineSpacingMultiplier="1.4"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/equipContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            android:padding="16dp"
+            android:background="@drawable/bg_apple_card" />
+
+        <!-- ═══ 按钮 ═══ -->
+        <Button
+            android:id="@+id/btnCalculate"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:text="计算营养目标"
+            android:textColor="@color/apple_text_primary"
+            android:textSize="17sp"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:background="@drawable/bg_apple_button"
+            app:layout_constraintTop_toBottomOf="@id/tvResult"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:text="确认保存"
+            android:textColor="@color/apple_text_primary"
+            android:textSize="17sp"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:background="@drawable/bg_apple_button"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/btnCalculate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="40dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

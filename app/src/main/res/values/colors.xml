@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ════════════════════════════════════════════
+         16 色低饱和复古色板（像素风 / 向后兼容）
+         ════════════════════════════════════════════ -->
+    <color name="pixel_outline">#1A1C2C</color>
+    <color name="pixel_orange">#FF6B35</color>
+    <color name="pixel_green">#4EC96B</color>
+    <color name="pixel_green_dark">#2A9D5A</color>
+    <color name="pixel_skin">#FFCCAA</color>
+    <color name="pixel_skin_dark">#D99A7C</color>
+    <color name="pixel_red">#E63946</color>
+    <color name="pixel_blue">#3A86FF</color>
+    <color name="pixel_purple">#6A4C93</color>
+    <color name="pixel_brown">#7F5539</color>
+    <color name="pixel_gray">#C9C9C9</color>
+    <color name="pixel_gray_dark">#5C5C5C</color>
+    <color name="pixel_bone">#F4F1DE</color>
+    <color name="pixel_yellow">#FFD166</color>
+    <color name="pixel_black">#000000</color>
+    <color name="pixel_white">#FFFFFF</color>
+
+    <!-- ════════════════════════════════════════════
+         Apple Dark Design System
+         ════════════════════════════════════════════ -->
+    <!-- 主背景 -->
+    <color name="apple_bg">#1d1d1f</color>
+    <!-- 卡片 / 表面层 -->
+    <color name="apple_surface">#2a2a2c</color>
+    <!-- 交替表面（用于列表行交替 / 次级卡片） -->
+    <color name="apple_surface_alt">#333333</color>
+    <!-- 主文字 -->
+    <color name="apple_text_primary">#ffffff</color>
+    <!-- 次级文字 -->
+    <color name="apple_text_secondary">#cccccc</color>
+    <!-- 三级文字（说明 / placeholder） -->
+    <color name="apple_text_tertiary">#999999</color>
+    <!-- 强调色（绿色，单色 accent 策略） -->
+    <color name="apple_accent">#34C759</color>
+    <!-- 危险色（红） -->
+    <color name="apple_danger">#FF3B30</color>
+    <!-- 警告色（橙） -->
+    <color name="apple_warning">#FF9500</color>
+    <!-- 分隔线 -->
+    <color name="apple_divider">#3a3a3c</color>
+</resources>

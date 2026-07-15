@@ -1,0 +1,14 @@
+{
+  "expPerAction": 10,
+  "expKillBonus": 40,
+  "comboBonusPerExtraGroup": 0.15,
+  "comboBonusMax": 0.45,
+  "streakBonusPerDay": 5,
+  "streakBonusCap": 30,
+  "coinPerExp": 0.1,
+  "levelBase": 150,
+  "levelGrowth": 60,
+  "levelExpCap": 900,
+  "restRoundDefaultS": 60,
+  "restActionDefaultS": 90
+}

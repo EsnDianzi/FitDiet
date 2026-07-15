@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Apple 风格主按钮：绿色 pill -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/apple_accent" />
+    <corners android:radius="24dp" />
+</shape>

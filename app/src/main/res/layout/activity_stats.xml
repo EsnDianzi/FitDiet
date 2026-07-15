@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/apple_bg"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- 标题 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="统计"
+            android:textColor="@color/apple_text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:letterSpacing="-0.02"
+            android:layout_marginBottom="20dp" />
+
+        <!-- ═══ 本周净热量缺口 + 连续打卡（并列） ═══ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/bg_apple_card_top"
+                android:layout_marginEnd="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="本周净热量缺口"
+                    android:textColor="@color/apple_text_tertiary"
+                    android:textSize="12sp"
+                    android:letterSpacing="-0.01" />
+
+                <TextView
+                    android:id="@+id/tvWeeklyDeficit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-- kcal"
+                    android:textColor="@color/apple_accent"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.02"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/bg_apple_card_top"
+                android:layout_marginStart="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="连续打卡"
+                    android:textColor="@color/apple_text_tertiary"
+                    android:textSize="12sp"
+                    android:letterSpacing="-0.01" />
+
+                <TextView
+                    android:id="@+id/tvStreak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-- 天"
+                    android:textColor="@color/apple_warning"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.02"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ═══ 体重曲线 ═══ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="体重曲线"
+            android:textColor="@color/apple_text_secondary"
+            android:textSize="13sp"
+            android:letterSpacing="-0.01"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <com.esn.fitdiet.ui.custom.WeightChartView
+            android:id="@+id/weightChart"
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
+
+        <!-- ═══ 训练历史 ═══ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="训练历史"
+            android:textColor="@color/apple_text_secondary"
+            android:textSize="13sp"
+            android:letterSpacing="-0.01"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:id="@+id/exerciseContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/tvEmptyExercise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="还没有训练记录，去 Boss 战页面发起第一次挑战吧"
+            android:textColor="@color/apple_text_tertiary"
+            android:textSize="13sp"
+            android:letterSpacing="-0.01"
+            android:padding="16dp"
+            android:background="@drawable/bg_apple_card" />
+
+        <!-- 返回 -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/btn_back"
+            android:textColor="@color/apple_text_primary"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_apple_button_secondary"
+            android:layout_marginTop="24dp" />
+
+    </LinearLayout>
+</ScrollView>

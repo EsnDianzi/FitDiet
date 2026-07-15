@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FitDiet</string>
+
+    <!-- 底部导航 -->
+    <string name="tab_home">首页</string>
+    <string name="tab_diet">饮食</string>
+    <string name="tab_train">训练</string>
+    <string name="tab_stats">统计</string>
+    <string name="tab_profile">我的</string>
+
+    <!-- 主页 -->
+    <string name="home_title">今日概览</string>
+    <string name="home_net_calories">净热量</string>
+    <string name="home_intake">摄入</string>
+    <string name="home_burned">消耗</string>
+    <string name="home_level">Lv.%d</string>
+    <string name="home_food_today">今日饮食</string>
+    <string name="home_empty_food">还没有记录，去拍张照吧！</string>
+    <string name="home_no_summary">正在计算今日汇总…</string>
+
+    <!-- 战斗页 -->
+    <string name="battle_title">Boss 挑战</string>
+    <string name="battle_start">开始战斗</string>
+    <string name="battle_attack">攻击</string>
+    <string name="battle_rest">休息回蓝</string>
+    <string name="battle_select_muscle">选择目标肌群</string>
+    <string name="battle_round">第 %d 回合</string>
+    <string name="battle_combo">连击 x%d</string>
+    <string name="battle_resting">休息中… %ds</string>
+    <string name="battle_boss_defeated">Boss 已击败！</string>
+    <string name="battle_session_done">训练完成！</string>
+    <string name="battle_reward_exp">经验 +%d</string>
+    <string name="battle_reward_coins">金币 +%d</string>
+    <string name="battle_reward_combo">连击加成 x%.0f%%</string>
+    <string name="battle_back_home">返回首页</string>
+
+    <!-- 成就页 -->
+    <string name="achievement_title">成就</string>
+    <string name="achievement_locked">未解锁</string>
+
+    <!-- 食物识别 -->
+    <string name="manual_entry">手动录入</string>
+    <string name="food_name_hint">食物名称</string>
+    <string name="food_weight_hint">重量（克）</string>
+    <string name="save_manual">保存</string>
+    <string name="no_network">网络不可用，请手动录入</string>
+    <string name="no_api_key">API Key 未配置，请手动录入</string>
+    <string name="ai_partial_success">AI 识别部分成功，未识别项请手动补录</string>
+
+    <!-- 引导页 -->
+    <string name="onboarding_title">欢迎来到 FitDiet</string>
+    <string name="empty_db_onboarding">首次使用，请先完成引导设置</string>
+
+    <!-- 通用 -->
+    <string name="btn_back">返回</string>
+    <string name="btn_confirm">确认</string>
+    <string name="btn_cancel">取消</string>
+</resources>

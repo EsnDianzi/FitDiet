@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 卡片下半圆角（用于连续卡片组的末项） -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/apple_surface" />
+    <corners android:bottomLeftRadius="12dp" android:bottomRightRadius="12dp" />
+</shape>

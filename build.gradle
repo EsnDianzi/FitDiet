@@ -1,0 +1,2 @@
+// Root build file. AGP is applied per-module via the plugins DSL in app/build.gradle.
+// Repositories are injected globally via ~/.gradle/init.gradle (allprojects).

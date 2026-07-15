@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/apple_bg"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="食物识别"
+            android:textColor="@color/apple_text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:letterSpacing="-0.02"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- 拍照识别按钮 -->
+        <Button
+            android:id="@+id/btnCapture"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:text="拍照识别"
+            android:textColor="@color/apple_text_primary"
+            android:textSize="17sp"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:background="@drawable/bg_apple_button"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="28dp" />
+
+        <!-- 识别结果 -->
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="点击拍照识别，或手动录入食物"
+            android:textColor="@color/apple_text_tertiary"
+            android:textSize="14sp"
+            android:letterSpacing="-0.01"
+            android:padding="16dp"
+            android:background="@drawable/bg_apple_card"
+            app:layout_constraintTop_toBottomOf="@id/btnCapture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp" />
+
+        <!-- ═══ 手动录入表单（默认隐藏） ═══ -->
+        <LinearLayout
+            android:id="@+id/manualForm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tvResult"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp">
+
+            <!-- 餐次 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="餐次"
+                android:textColor="@color/apple_text_secondary"
+                android:textSize="13sp"
+                android:letterSpacing="-0.01"
+                android:layout_marginBottom="6dp" />
+
+            <Spinner
+                android:id="@+id/spMealType"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_apple_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 食材选择 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="食材"
+                android:textColor="@color/apple_text_secondary"
+                android:textSize="13sp"
+                android:letterSpacing="-0.01"
+                android:layout_marginBottom="6dp" />
+
+            <Spinner
+                android:id="@+id/spFoodPreset"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_apple_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 食物名 -->
+            <EditText
+                android:id="@+id/etFoodName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="@string/food_name_hint"
+                android:textColor="@color/apple_text_primary"
+                android:textColorHint="@color/apple_text_tertiary"
+                android:background="@drawable/bg_apple_input"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- 重量 -->
+            <EditText
+                android:id="@+id/etWeightG"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="@string/food_weight_hint"
+                android:textColor="@color/apple_text_primary"
+                android:textColorHint="@color/apple_text_tertiary"
+                android:background="@drawable/bg_apple_input"
+                android:inputType="numberDecimal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/btnSaveManual"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/save_manual"
+                android:textColor="@color/apple_text_primary"
+                android:textSize="15sp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:background="@drawable/bg_apple_button" />
+        </LinearLayout>
+
+        <!-- 手动录入入口 -->
+        <Button
+            android:id="@+id/btnManual"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="@string/manual_entry"
+            android:textColor="@color/apple_text_primary"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_apple_button_secondary"
+            app:layout_constraintTop_toBottomOf="@id/manualForm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

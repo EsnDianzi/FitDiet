@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1d1d1f"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <!-- ===== 标题栏 ===== -->
+        <TextView
+            android:id="@+id/tvPageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="训练"
+            android:textColor="#ffffff"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:letterSpacing="-0.02"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:text="✕"
+            android:textColor="#999999"
+            android:textSize="18sp"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- ===== 预设组合选择区（战斗前可见） ===== -->
+        <TextView
+            android:id="@+id/tvComboLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择训练组合"
+            android:textColor="#cccccc"
+            android:textSize="14sp"
+            android:letterSpacing="-0.01"
+            app:layout_constraintTop_toBottomOf="@id/tvPageTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="32dp" />
+
+        <!-- 组合模板按钮 -->
+        <LinearLayout
+            android:id="@+id/comboPresets"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tvComboLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/btnPresetChestBi"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="胸 + 二头"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_battle_preset"
+                android:gravity="start|center_vertical"
+                android:paddingStart="20dp"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnPresetBackTri"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="背 + 三头"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_battle_preset"
+                android:gravity="start|center_vertical"
+                android:paddingStart="20dp"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnPresetLegs"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="臀腿"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_battle_preset"
+                android:gravity="start|center_vertical"
+                android:paddingStart="20dp"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnPresetShoulderCore"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="肩 + 核心"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_battle_preset"
+                android:gravity="start|center_vertical"
+                android:paddingStart="20dp"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnPresetFullBody"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="全身（胸+背+腿+肩+臂+核心）"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_battle_preset"
+                android:gravity="start|center_vertical"
+                android:paddingStart="20dp" />
+        </LinearLayout>
+
+        <!-- 自定义肌群选择 -->
+        <TextView
+            android:id="@+id/tvCustomLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="或自选肌群"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/comboPresets"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp" />
+
+        <LinearLayout
+            android:id="@+id/customMuscleRow1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tvCustomLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp">
+
+            <Button android:id="@+id/btnMuscle1" android:layout_width="0dp" android:layout_height="40dp"
+                android:layout_weight="1" android:text="胸" android:textSize="13sp" android:textAllCaps="false"
+                android:textColor="#ffffff" android:background="@drawable/bg_battle_muscle"
+                android:layout_marginEnd="6dp" android:minWidth="0dp" />
+            <Button android:id="@+id/btnMuscle2" android:layout_width="0dp" android:layout_height="40dp"
+                android:layout_weight="1" android:text="背" android:textSize="13sp" android:textAllCaps="false"
+                android:textColor="#ffffff" android:background="@drawable/bg_battle_muscle"
+                android:layout_marginEnd="6dp" android:minWidth="0dp" />
+            <Button android:id="@+id/btnMuscle3" android:layout_width="0dp" android:layout_height="40dp"
+                android:layout_weight="1" android:text="腿" android:textSize="13sp" android:textAllCaps="false"
+                android:textColor="#ffffff" android:background="@drawable/bg_battle_muscle"
+                android:minWidth="0dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/customMuscleRow2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/customMuscleRow1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="6dp">
+
+            <Button android:id="@+id/btnMuscle4" android:layout_width="0dp" android:layout_height="40dp"
+                android:layout_weight="1" android:text="肩" android:textSize="13sp" android:textAllCaps="false"
+                android:textColor="#ffffff" android:background="@drawable/bg_battle_muscle"
+                android:layout_marginEnd="6dp" android:minWidth="0dp" />
+            <Button android:id="@+id/btnMuscle5" android:layout_width="0dp" android:layout_height="40dp"
+                android:layout_weight="1" android:text="臂" android:textSize="13sp" android:textAllCaps="false"
+                android:textColor="#ffffff" android:background="@drawable/bg_battle_muscle"
+                android:layout_marginEnd="6dp" android:minWidth="0dp" />
+            <Button android:id="@+id/btnMuscle6" android:layout_width="0dp" android:layout_height="40dp"
+                android:layout_weight="1" android:text="核心" android:textSize="13sp" android:textAllCaps="false"
+                android:textColor="#ffffff" android:background="@drawable/bg_battle_muscle"
+                android:minWidth="0dp" />
+        </LinearLayout>
+
+        <!-- 已选肌群摘要 -->
+        <TextView
+            android:id="@+id/tvSelectedMuscles"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#34C759"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/customMuscleRow2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp" />
+
+        <!-- ===== 战斗区域（战斗开始后可见） ===== -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/battleArea"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tvSelectedMuscles"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp">
+
+            <!-- Boss 精灵图 -->
+            <ImageView
+                android:id="@+id/ivBossSprite"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="Boss" />
+
+            <!-- Boss 名称 -->
+            <TextView
+                android:id="@+id/tvBossName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivBossSprite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" />
+
+            <!-- 肌群 + 进度 -->
+            <TextView
+                android:id="@+id/tvBossInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#999999"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/tvBossName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="4dp" />
+
+            <!-- 血条 -->
+            <com.esn.fitdiet.ui.custom.PixelProgressBar
+                android:id="@+id/bossHpBar"
+                android:layout_width="0dp"
+                android:layout_height="14dp"
+                app:fillColor="#FF3B30"
+                app:layout_constraintTop_toBottomOf="@id/tvBossInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" />
+
+            <!-- 回合状态 -->
+            <TextView
+                android:id="@+id/tvRound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/bossHpBar"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="12dp" />
+
+            <!-- 休息倒计时 -->
+            <TextView
+                android:id="@+id/tvRestTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#FF9500"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/tvRound"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <!-- 休息提示 -->
+            <TextView
+                android:id="@+id/tvRestLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="组间休息"
+                android:textColor="#FF9500"
+                android:textSize="13sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/tvRestTimer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="4dp" />
+
+            <!-- 战斗按钮区 -->
+            <LinearLayout
+                android:id="@+id/battleButtons"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/tvRestLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="24dp">
+
+                <Button
+                    android:id="@+id/btnCompleteRound"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:text="完成一组"
+                    android:textColor="#ffffff"
+                    android:textSize="17sp"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_battle_primary"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnSkipRest"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:text="跳过休息"
+                    android:textColor="#ffffff"
+                    android:textSize="17sp"
+                    android:textAllCaps="false"
+                    android:background="@drawable/bg_battle_secondary"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- 结束训练 -->
+            <Button
+                android:id="@+id/btnEndSession"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:text="结束训练"
+                android:textColor="#FF3B30"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toBottomOf="@id/battleButtons"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
