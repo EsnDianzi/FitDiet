@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 饮食记录卡片项（Apple 风格） -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="14dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_apple_card">
+
+    <!-- 顶部：餐次标签 + 来源 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="6dp">
+
+        <TextView
+            android:id="@+id/tvMealType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="@color/apple_accent"
+            android:textSize="11sp"
+            android:letterSpacing="0.04"
+            android:textAllCaps="true"
+            android:background="@drawable/bg_meal_tag"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="@color/apple_text_tertiary"
+            android:textSize="10sp"
+            android:letterSpacing="0.04"
+            android:textAllCaps="true" />
+    </LinearLayout>
+
+    <!-- 中部：食物名 + 重量 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/tvFoodName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="--"
+            android:textColor="@color/apple_text_primary"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:letterSpacing="-0.01" />
+
+        <TextView
+            android:id="@+id/tvCalories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="@color/apple_text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:letterSpacing="-0.01" />
+    </LinearLayout>
+
+    <!-- 底部：三大营养素分布条 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/barProtein"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/apple_accent" />
+
+        <View
+            android:id="@+id/barCarbs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/apple_warning" />
+
+        <View
+            android:id="@+id/barFat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/apple_danger" />
+    </LinearLayout>
+
+    <!-- 三大营养素文字 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="6dp">
+
+        <TextView
+            android:id="@+id/tvProtein"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="蛋白 --"
+            android:textColor="@color/apple_text_tertiary"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tvCarbs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="碳水 --"
+            android:textColor="@color/apple_text_tertiary"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tvFat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="脂肪 --"
+            android:textColor="@color/apple_text_tertiary"
+            android:textSize="11sp" />
+    </LinearLayout>
+</LinearLayout>

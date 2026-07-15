@@ -37,13 +37,14 @@ public class AppContainerImpl implements AppContainer {
                 db.dailySummaryDao(), db.levelProgressDao(), db.exerciseLogDao(),
                 db.userProfileDao());
 
-        // 食物日志写入后立即重算当日 DailySummary，保证首页「摄入」数字实时更新
+        // 食物日志写入后立即刷新当日 DailySummary，保证首页「摄入」数字实时更新
+        // 用 refreshForDate（强制重算）而非 ensureForDate（仅缺失时生成）
         this.foodRepository.setOnInsertedHook(() ->
-                this.summaryRepository.ensureForDate(DateUtil.today()));
+                this.summaryRepository.refreshForDate(DateUtil.today()));
 
-        // 训练完成后立即重算当日 DailySummary，保证首页「消耗」和统计页数据实时更新
+        // 训练完成后立即刷新当日 DailySummary，保证首页「消耗」和统计页数据实时更新
         this.battleRepository.setOnSessionCompleteHook(() ->
-                this.summaryRepository.ensureForDate(DateUtil.today()));
+                this.summaryRepository.refreshForDate(DateUtil.today()));
     }
 
     @Override

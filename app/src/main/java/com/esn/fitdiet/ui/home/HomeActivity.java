@@ -117,7 +117,7 @@ public class HomeActivity extends AppCompatActivity {
         };
         vm.todaySummary().observe(this, summaryObserver);
 
-        // ── 当日饮食 LiveData ──
+        // ── 当日饮食 LiveData（卡片式） ──
         foodObserver = foods -> {
             LinearLayout listContainer = binding.foodListContainer;
             listContainer.removeAllViews();
@@ -132,18 +132,10 @@ public class HomeActivity extends AppCompatActivity {
             }
             for (int i = 0; i < foods.size(); i++) {
                 FoodLog f = foods.get(i);
-                TextView tv = new TextView(this);
-                tv.setText(String.format(Locale.getDefault(),
-                        "%s  %.0f kcal  (%s)",
-                        f.foodName, f.calories, f.source.name()));
-                tv.setTextColor(getColor(R.color.apple_text_primary));
-                tv.setTextSize(14);
-                tv.setLetterSpacing(-0.01f);
-                tv.setPadding(16, 12, 16, 12);
-                // 交替行背景
-                tv.setBackgroundColor(getColor(
-                        i % 2 == 0 ? R.color.apple_surface : R.color.apple_bg));
-                listContainer.addView(tv);
+                com.esn.fitdiet.ui.custom.FoodItemView card =
+                        new com.esn.fitdiet.ui.custom.FoodItemView(this);
+                card.setData(f);
+                listContainer.addView(card);
             }
         };
         vm.todayFood().observe(this, foodObserver);

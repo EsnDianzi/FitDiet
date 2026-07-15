@@ -112,6 +112,15 @@ public class SummaryRepository {
     }
 
     /**
+     * 强制重算指定日期的 DailySummary（无论是否存在）。
+     * 适用场景：FoodLog / ExerciseLog 写入后立即刷新摄入/消耗。
+     * REPLACE 写入幂等，updatedAt 会被刷新，触发 observeByDate LiveData 推送。
+     */
+    public void refreshForDate(String date) {
+        generateForDate(date);
+    }
+
+    /**
      * 找出缺失或过期（updatedAt 早于该日最新 FoodLog/ExerciseLog 写入时间）的日期。
      * 支撑 TC-X-11 补算。
      */
