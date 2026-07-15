@@ -5,9 +5,11 @@ import androidx.lifecycle.LiveData;
 import com.esn.fitdiet.data.local.dao.DailySummaryDao;
 import com.esn.fitdiet.data.local.dao.ExerciseLogDao;
 import com.esn.fitdiet.data.local.dao.LevelProgressDao;
+import com.esn.fitdiet.data.local.dao.UserProfileDao;
 import com.esn.fitdiet.data.local.entity.DailySummary;
 import com.esn.fitdiet.data.local.entity.ExerciseLog;
 import com.esn.fitdiet.data.local.entity.LevelProgress;
+import com.esn.fitdiet.data.local.entity.UserProfile;
 import com.esn.fitdiet.util.DateUtil;
 
 import java.util.ArrayList;
@@ -25,13 +27,16 @@ public class StatsRepository {
     private final DailySummaryDao summaryDao;
     private final LevelProgressDao levelProgressDao;
     private final ExerciseLogDao exerciseLogDao;
+    private final UserProfileDao userProfileDao;
 
     public StatsRepository(DailySummaryDao summaryDao,
                           LevelProgressDao levelProgressDao,
-                          ExerciseLogDao exerciseLogDao) {
+                          ExerciseLogDao exerciseLogDao,
+                          UserProfileDao userProfileDao) {
         this.summaryDao = summaryDao;
         this.levelProgressDao = levelProgressDao;
         this.exerciseLogDao = exerciseLogDao;
+        this.userProfileDao = userProfileDao;
     }
 
     public LiveData<List<DailySummary>> observeRecent(int limit) {
@@ -61,16 +66,27 @@ public class StatsRepository {
         return summaryDao.observeRecent(60); // 取近 60 天供 UI 自行过滤
     }
 
-    /** 同步取体重曲线点（date, weightKg）。 */
+    /**
+     * 同步取体重曲线点（date, weightKg）。
+     * 优先从 DailySummary 读取历史体重点；如果为空，回退到 UserProfile 建档体重作为初始点。
+     */
     public List<WeightPoint> getWeightPoints() {
-        List<DailySummary> recent = summaryDao.getRecent(60);
         List<WeightPoint> out = new ArrayList<>();
-        if (recent == null) return out;
-        // getRecent 是 DESC，需反转成 ASC
-        for (int i = recent.size() - 1; i >= 0; i--) {
-            DailySummary s = recent.get(i);
-            if (s.weightKg != null && s.weightKg > 0) {
-                out.add(new WeightPoint(s.date, s.weightKg));
+        List<DailySummary> recent = summaryDao.getRecent(60);
+        if (recent != null) {
+            // getRecent 是 DESC，需反转成 ASC
+            for (int i = recent.size() - 1; i >= 0; i--) {
+                DailySummary s = recent.get(i);
+                if (s.weightKg != null && s.weightKg > 0) {
+                    out.add(new WeightPoint(s.date, s.weightKg));
+                }
+            }
+        }
+        // Fallback：历史体重未记录时，使用 UserProfile 的初始体重作为曲线起点
+        if (out.isEmpty()) {
+            UserProfile profile = userProfileDao.get();
+            if (profile != null && profile.weightKg > 0) {
+                out.add(new WeightPoint(DateUtil.today(), profile.weightKg));
             }
         }
         return out;

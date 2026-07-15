@@ -50,7 +50,8 @@ public class StatsRepositoryTest {
                 .allowMainThreadQueries()
                 .build();
         repo = new StatsRepository(
-                db.dailySummaryDao(), db.levelProgressDao(), db.exerciseLogDao());
+                db.dailySummaryDao(), db.levelProgressDao(), db.exerciseLogDao(),
+                db.userProfileDao());
     }
 
     @After

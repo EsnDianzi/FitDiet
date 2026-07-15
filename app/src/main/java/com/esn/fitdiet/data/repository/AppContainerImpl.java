@@ -4,6 +4,7 @@ import com.esn.fitdiet.data.local.AppDatabase;
 import com.esn.fitdiet.data.remote.QwenVisionMock;
 import com.esn.fitdiet.data.remote.QwenVisionService;
 import com.esn.fitdiet.util.AppExecutors;
+import com.esn.fitdiet.util.DateUtil;
 
 /**
  * 全局依赖容器实现。
@@ -33,7 +34,16 @@ public class AppContainerImpl implements AppContainer {
                 db.dailySummaryDao(), db.foodLogDao(), db.exerciseLogDao(),
                 db.userProfileDao(), executors);
         this.statsRepository = new StatsRepository(
-                db.dailySummaryDao(), db.levelProgressDao(), db.exerciseLogDao());
+                db.dailySummaryDao(), db.levelProgressDao(), db.exerciseLogDao(),
+                db.userProfileDao());
+
+        // 食物日志写入后立即重算当日 DailySummary，保证首页「摄入」数字实时更新
+        this.foodRepository.setOnInsertedHook(() ->
+                this.summaryRepository.ensureForDate(DateUtil.today()));
+
+        // 训练完成后立即重算当日 DailySummary，保证首页「消耗」和统计页数据实时更新
+        this.battleRepository.setOnSessionCompleteHook(() ->
+                this.summaryRepository.ensureForDate(DateUtil.today()));
     }
 
     @Override

@@ -368,8 +368,9 @@ public class BattleActivity extends AppCompatActivity {
             int oldLevel = (before != null) ? before.level : 1;
             int oldStreak = (before != null) ? before.streakDays : 0;
 
-            // 持久化
-            battleRepo.completeCombo(groupPlans, DateUtil.today());
+            // 同步执行：completeComboSync 内部完成所有写入后才返回
+            // 这样紧跟着 getProgress() 能读到最新值
+            battleRepo.completeComboSync(groupPlans, DateUtil.today());
 
             LevelProgress after = battleRepo.getProgress();
             int newLevel = (after != null) ? after.level : oldLevel;

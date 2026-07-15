@@ -27,6 +27,8 @@ public class BattleRepository {
     private final MonsterDefDao monsterDefDao;
     private final LevelProgressDao levelProgressDao;
     private final AppExecutors executors;
+    /** 写完 ExerciseLog 后回调（用于立即重算 DailySummary）。 */
+    private Runnable onSessionCompleteHook;
 
     public BattleRepository(ExerciseLogDao exerciseLogDao,
                             MonsterDefDao monsterDefDao,
@@ -36,6 +38,11 @@ public class BattleRepository {
         this.monsterDefDao = monsterDefDao;
         this.levelProgressDao = levelProgressDao;
         this.executors = executors;
+    }
+
+    /** 设置训练完成回调。 */
+    public void setOnSessionCompleteHook(Runnable hook) {
+        this.onSessionCompleteHook = hook;
     }
 
     /** 异步插入训练日志。 */
@@ -77,7 +84,7 @@ public class BattleRepository {
      * 同步核心逻辑（供单测直接调用，使用注入的 DAO）：
      * 逐肌群写入 ExerciseLog（动作 EXP + 击杀奖励），并在 LevelProgress 累加连击加成与首杀连续天数。
      */
-    void completeComboSync(List<BattleManager.GroupPlan> groups, String date) {
+    public void completeComboSync(List<BattleManager.GroupPlan> groups, String date) {
         LevelProgress lp = levelProgressDao.get();
         if (lp == null) {
             lp = new LevelProgress();
@@ -139,5 +146,8 @@ public class BattleRepository {
         }
         lp.level = LevelSystem.getLevel(lp.totalExp);
         levelProgressDao.update(lp);
+
+        // 训练完成：触发 DailySummary 重算
+        if (onSessionCompleteHook != null) onSessionCompleteHook.run();
     }
 }

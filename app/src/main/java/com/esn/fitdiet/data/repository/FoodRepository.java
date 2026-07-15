@@ -29,6 +29,8 @@ public class FoodRepository {
     private final QwenVisionService visionService;
     private final AppExecutors executors;
     private final long retryBackoffMs;
+    /** 写完 FoodLog 后回调（用于立即重算 DailySummary）。 */
+    private Runnable onInsertedHook;
 
     public FoodRepository(FoodLogDao foodLogDao, QwenVisionService visionService, AppExecutors executors) {
         this(foodLogDao, visionService, executors, 300L);
@@ -42,18 +44,29 @@ public class FoodRepository {
         this.retryBackoffMs = Math.max(0, retryBackoffMs);
     }
 
+    /** 设置写入后回调（SummaryRepository 在此重算 DailySummary）。 */
+    public void setOnInsertedHook(Runnable hook) {
+        this.onInsertedHook = hook;
+    }
+
     public LiveData<List<FoodLog>> observeByDate(String date) {
         return foodLogDao.observeByDate(date);
     }
 
-    /** 异步插入，在 diskIO 执行。 */
+    /** 异步插入，写入后回调（用于刷新 DailySummary）。 */
     public void insert(FoodLog log) {
-        executors.diskIO().execute(() -> foodLogDao.insert(log));
+        executors.diskIO().execute(() -> {
+            foodLogDao.insert(log);
+            if (onInsertedHook != null) onInsertedHook.run();
+        });
     }
 
-    /** 异步批量插入。 */
+    /** 异步批量插入，写入后回调。 */
     public void insertAll(List<FoodLog> logs) {
-        executors.diskIO().execute(() -> foodLogDao.insertAll(logs));
+        executors.diskIO().execute(() -> {
+            foodLogDao.insertAll(logs);
+            if (onInsertedHook != null) onInsertedHook.run();
+        });
     }
 
     /** 同步调用视觉识别（已在调用方异步执行）。 */
