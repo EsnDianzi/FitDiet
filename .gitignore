@@ -4,6 +4,7 @@ app/build/
 *.apk
 *.aab
 *.aar
+*.zip
 
 # IDE
 .idea/
@@ -18,7 +19,12 @@ Thumbs.db
 # Test outputs
 app/schemas/
 
-# Temp files
+# Temp / logs
 *.log
 *.tmp
-FitDiet-*.zip
+
+# Dev scripts & docs (not part of the app)
+gen_*.py
+pixel_preview.png
+PRD.md
+*.md.bak
