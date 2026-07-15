@@ -1,206 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/apple_bg"
-    android:fillViewport="true">
+    android:background="@color/apple_bg">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="24dp">
+    <!-- 滚动内容区（在导航栏上方） -->
+    <ScrollView
+        android:id="@+id/scrollContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/navBar">
 
-        <!-- ═══ 页头：等级 ═══ -->
-        <TextView
-            android:id="@+id/tvLevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lv.1"
-            android:textColor="@color/apple_text_primary"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            android:letterSpacing="-0.02"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <!-- EXP 进度条 -->
-        <com.esn.fitdiet.ui.custom.PixelProgressBar
-            android:id="@+id/expBar"
-            android:layout_width="0dp"
-            android:layout_height="6dp"
-            app:fillColor="@color/apple_accent"
-            app:layout_constraintTop_toBottomOf="@id/tvLevel"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp" />
-
-        <!-- ═══ 今日净热量卡片 ═══ -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cardSummary"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_apple_card"
-            android:padding="20dp"
-            app:layout_constraintTop_toBottomOf="@id/expBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp">
+            android:padding="24dp">
 
+            <!-- ═══ 页头：等级 ═══ -->
             <TextView
-                android:id="@+id/tvSummaryLabel"
+                android:id="@+id/tvLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="今日净热量"
-                android:textColor="@color/apple_text_tertiary"
-                android:textSize="12sp"
-                android:letterSpacing="-0.01"
+                android:text="Lv.1"
+                android:textColor="@color/apple_text_primary"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/tvNetCalories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-- kcal"
-                android:textColor="@color/apple_accent"
-                android:textSize="36sp"
-                android:textStyle="bold"
-                android:letterSpacing="-0.02"
-                app:layout_constraintTop_toBottomOf="@id/tvSummaryLabel"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="4dp" />
-
-            <!-- 摄入 / 消耗 小字 -->
-            <LinearLayout
-                android:id="@+id/ioRow"
+            <!-- EXP 进度条 -->
+            <com.esn.fitdiet.ui.custom.PixelProgressBar
+                android:id="@+id/expBar"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/tvNetCalories"
+                android:layout_height="6dp"
+                app:fillColor="@color/apple_accent"
+                app:layout_constraintTop_toBottomOf="@id/tvLevel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="10dp" />
+
+            <!-- ═══ 今日净热量卡片 ═══ -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardSummary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_apple_card"
+                android:padding="20dp"
+                app:layout_constraintTop_toBottomOf="@id/expBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="24dp">
 
                 <TextView
-                    android:id="@+id/tvIntake"
-                    android:layout_width="0dp"
+                    android:id="@+id/tvSummaryLabel"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="摄入 --"
-                    android:textColor="@color/apple_warning"
-                    android:textSize="13sp"
-                    android:letterSpacing="-0.01" />
-
-                <TextView
-                    android:id="@+id/tvBurned"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="消耗 --"
-                    android:textColor="@color/apple_danger"
-                    android:textSize="13sp"
+                    android:text="今日净热量"
+                    android:textColor="@color/apple_text_tertiary"
+                    android:textSize="12sp"
                     android:letterSpacing="-0.01"
-                    android:gravity="end" />
-            </LinearLayout>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvNetCalories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-- kcal"
+                    android:textColor="@color/apple_accent"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.02"
+                    app:layout_constraintTop_toBottomOf="@id/tvSummaryLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="4dp" />
+
+                <LinearLayout
+                    android:id="@+id/ioRow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/tvNetCalories"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="12dp">
+
+                    <TextView
+                        android:id="@+id/tvIntake"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="摄入 --"
+                        android:textColor="@color/apple_warning"
+                        android:textSize="13sp"
+                        android:letterSpacing="-0.01" />
+
+                    <TextView
+                        android:id="@+id/tvBurned"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="消耗 --"
+                        android:textColor="@color/apple_danger"
+                        android:textSize="13sp"
+                        android:letterSpacing="-0.01"
+                        android:gravity="end" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- ═══ 饮食列表标题 ═══ -->
+            <TextView
+                android:id="@+id/tvFoodTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_food_today"
+                android:textColor="@color/apple_text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02"
+                app:layout_constraintTop_toBottomOf="@id/cardSummary"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="28dp" />
+
+            <LinearLayout
+                android:id="@+id/foodListContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/tvFoodTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="12dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-        <!-- ═══ 饮食列表标题 ═══ -->
-        <TextView
-            android:id="@+id/tvFoodTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_food_today"
-            android:textColor="@color/apple_text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:letterSpacing="-0.02"
-            app:layout_constraintTop_toBottomOf="@id/cardSummary"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="28dp" />
+    <include
+        android:id="@+id/navBar"
+        layout="@layout/include_bottom_nav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- 饮食列表容器 -->
-        <LinearLayout
-            android:id="@+id/foodListContainer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/tvFoodTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="80dp" />
-
-        <!-- ═══ 底部导航栏 ═══ -->
-        <LinearLayout
-            android:id="@+id/navBar"
-            android:layout_width="0dp"
-            android:layout_height="64dp"
-            android:orientation="horizontal"
-            android:background="@color/apple_surface"
-            android:gravity="center"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <TextView
-                android:id="@+id/btnTabHome"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/tab_home"
-                android:textColor="@color/apple_accent"
-                android:textSize="11sp"
-                android:letterSpacing="-0.01" />
-
-            <TextView
-                android:id="@+id/btnTabDiet"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/tab_diet"
-                android:textColor="@color/apple_text_tertiary"
-                android:textSize="11sp"
-                android:letterSpacing="-0.01" />
-
-            <TextView
-                android:id="@+id/btnTabTrain"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/tab_train"
-                android:textColor="@color/apple_text_tertiary"
-                android:textSize="11sp"
-                android:letterSpacing="-0.01" />
-
-            <TextView
-                android:id="@+id/btnTabStats"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/tab_stats"
-                android:textColor="@color/apple_text_tertiary"
-                android:textSize="11sp"
-                android:letterSpacing="-0.01" />
-
-            <TextView
-                android:id="@+id/btnTabProfile"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/tab_profile"
-                android:textColor="@color/apple_text_tertiary"
-                android:textSize="11sp"
-                android:letterSpacing="-0.01" />
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

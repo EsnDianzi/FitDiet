@@ -120,6 +120,9 @@ public class FoodRecognitionActivity extends AppCompatActivity {
 
         btnManual.setOnClickListener(v -> showManualForm());
 
+        // 绑定底部导航栏
+        com.esn.fitdiet.ui.common.BottomNavHelper.bind(this, findViewById(R.id.navBar));
+
         // 手动保存按钮
         btnSaveManual.setOnClickListener(v -> saveManualEntry());
     }

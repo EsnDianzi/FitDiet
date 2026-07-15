@@ -89,16 +89,8 @@ public class HomeActivity extends AppCompatActivity {
             });
         });
 
-        // ── 底部导航（5 Tab） ──
-        binding.btnTabHome.setOnClickListener(v -> { /* 已在首页 */ });
-        binding.btnTabDiet.setOnClickListener(v ->
-                startActivity(new Intent(this, FoodRecognitionActivity.class)));
-        binding.btnTabTrain.setOnClickListener(v ->
-                startActivity(new Intent(this, BattleActivity.class)));
-        binding.btnTabStats.setOnClickListener(v ->
-                startActivity(new Intent(this, StatsActivity.class)));
-        binding.btnTabProfile.setOnClickListener(v ->
-                startActivity(new Intent(this, ProfileActivity.class)));
+        // ── 底部导航栏（统一助手，自动高亮当前 tab） ──
+        com.esn.fitdiet.ui.common.BottomNavHelper.bind(this, findViewById(R.id.navBar));
     }
 
     /** 绑定 LiveData 观察者（需在 DB 读取完成后调用） */

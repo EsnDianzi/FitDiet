@@ -90,6 +90,9 @@ public class BattleActivity extends AppCompatActivity {
         binding.btnSkipRest.setOnClickListener(v -> onSkipRest());
         binding.btnEndSession.setOnClickListener(v -> confirmEndSession());
         binding.btnBack.setOnClickListener(v -> finish());
+
+        // 绑定底部导航栏
+        com.esn.fitdiet.ui.common.BottomNavHelper.bind(this, findViewById(R.id.navBar));
     }
 
     /** 绑定 5 个预设组合按钮 */

@@ -53,6 +53,9 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(new Intent(this, OnboardingActivity.class)));
 
         binding.btnBack.setOnClickListener(v -> finish());
+
+        // 绑定底部导航栏
+        com.esn.fitdiet.ui.common.BottomNavHelper.bind(this, findViewById(R.id.navBar));
     }
 
     @Override

@@ -74,6 +74,9 @@ public class StatsActivity extends AppCompatActivity {
         });
 
         binding.btnBack.setOnClickListener(v -> finish());
+
+        // 绑定底部导航栏
+        com.esn.fitdiet.ui.common.BottomNavHelper.bind(this, findViewById(R.id.navBar));
     }
 
     /** 渲染训练历史列表。空列表显示提示语。 */

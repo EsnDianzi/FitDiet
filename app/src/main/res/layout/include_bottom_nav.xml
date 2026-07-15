@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 通用底部导航栏（5 Tab）。通过 include 引入到各 Activity。 -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navBar"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:orientation="horizontal"
+    android:background="@color/apple_surface"
+    android:gravity="center"
+    android:elevation="8dp">
+
+    <TextView
+        android:id="@+id/btnTabHome"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/tab_home"
+        android:textColor="@color/apple_text_tertiary"
+        android:textSize="11sp"
+        android:letterSpacing="-0.01" />
+
+    <TextView
+        android:id="@+id/btnTabDiet"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/tab_diet"
+        android:textColor="@color/apple_text_tertiary"
+        android:textSize="11sp"
+        android:letterSpacing="-0.01" />
+
+    <TextView
+        android:id="@+id/btnTabTrain"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/tab_train"
+        android:textColor="@color/apple_text_tertiary"
+        android:textSize="11sp"
+        android:letterSpacing="-0.01" />
+
+    <TextView
+        android:id="@+id/btnTabStats"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/tab_stats"
+        android:textColor="@color/apple_text_tertiary"
+        android:textSize="11sp"
+        android:letterSpacing="-0.01" />
+
+    <TextView
+        android:id="@+id/btnTabProfile"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/tab_profile"
+        android:textColor="@color/apple_text_tertiary"
+        android:textSize="11sp"
+        android:letterSpacing="-0.01" />
+</LinearLayout>
