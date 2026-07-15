@@ -40,6 +40,14 @@ public class NutritionRepository {
         executors.diskIO().execute(() -> userProfileDao.insert(profile));
     }
 
+    /** 异步更新档案（保留 createdAt，刷新 updatedAt）。 */
+    public void updateProfile(UserProfile profile) {
+        executors.diskIO().execute(() -> {
+            profile.updatedAt = System.currentTimeMillis();
+            userProfileDao.update(profile);
+        });
+    }
+
     /** 由档案直接计算营养目标；档案为空返回 null。 */
     public NutritionTarget computeTarget(UserProfile profile) {
         if (profile == null) return null;

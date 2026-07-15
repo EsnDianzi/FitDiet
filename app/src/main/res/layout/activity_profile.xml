@@ -21,22 +21,418 @@
             android:textSize="28sp"
             android:textStyle="bold"
             android:letterSpacing="-0.02"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="20dp" />
 
-        <!-- 档案摘要卡片 -->
-        <TextView
-            android:id="@+id/tvProfileSummary"
+        <!-- ═══ 基础信息卡（2x2 网格） ═══ -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/apple_text_secondary"
-            android:textSize="13sp"
-            android:letterSpacing="-0.01"
-            android:lineSpacingMultiplier="1.5"
+            android:orientation="vertical"
             android:padding="16dp"
             android:background="@drawable/bg_apple_card"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="12dp">
 
-        <!-- API Key 设置区 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="基础信息"
+                android:textColor="@color/apple_text_tertiary"
+                android:textSize="12sp"
+                android:letterSpacing="0.02"
+                android:textAllCaps="true"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="年龄"
+                        android:textColor="@color/apple_text_tertiary"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tvAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="--"
+                        android:textColor="@color/apple_text_primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="-0.02"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="性别"
+                        android:textColor="@color/apple_text_tertiary"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tvGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="--"
+                        android:textColor="@color/apple_text_primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="-0.02"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="身高"
+                        android:textColor="@color/apple_text_tertiary"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tvHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="--"
+                        android:textColor="@color/apple_text_primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="-0.02"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="体重"
+                        android:textColor="@color/apple_text_tertiary"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tvWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="--"
+                        android:textColor="@color/apple_text_primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="-0.02"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ═══ 目标 & 活动（卡片行） ═══ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@drawable/bg_apple_card"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="目标与活动"
+                android:textColor="@color/apple_text_tertiary"
+                android:textSize="12sp"
+                android:letterSpacing="0.02"
+                android:textAllCaps="true"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="核心目标"
+                    android:textColor="@color/apple_text_secondary"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/tvGoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="@color/apple_text_primary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="活动水平"
+                    android:textColor="@color/apple_text_secondary"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/tvActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="@color/apple_text_primary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="促睾强化"
+                    android:textColor="@color/apple_text_secondary"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/tvBoost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="@color/apple_text_primary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ═══ 营养目标（卡片+大数字） ═══ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@drawable/bg_apple_card"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每日营养目标"
+                android:textColor="@color/apple_text_tertiary"
+                android:textSize="12sp"
+                android:letterSpacing="0.02"
+                android:textAllCaps="true"
+                android:layout_marginBottom="12dp" />
+
+            <!-- 目标热量（大字突出） -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="目标热量"
+                    android:textColor="@color/apple_text_tertiary"
+                    android:textSize="11sp" />
+                <TextView
+                    android:id="@+id/tvTargetCalories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-- kcal"
+                    android:textColor="@color/apple_accent"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.02"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <!-- BMR / TDEE 小字两列 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BMR"
+                        android:textColor="@color/apple_text_tertiary"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tvBmr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="--"
+                        android:textColor="@color/apple_text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="-0.01"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TDEE"
+                        android:textColor="@color/apple_text_tertiary"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tvTdee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="--"
+                        android:textColor="@color/apple_text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="-0.01"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 三大营养素（彩色横条 + 数值） -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="三大营养素"
+                android:textColor="@color/apple_text_tertiary"
+                android:textSize="11sp"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="@color/apple_accent"
+                        android:layout_marginBottom="6dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="蛋白质"
+                        android:textColor="@color/apple_text_tertiary"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tvProtein"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-- g"
+                        android:textColor="@color/apple_text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="-0.01"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="@color/apple_warning"
+                        android:layout_marginBottom="6dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="脂肪"
+                        android:textColor="@color/apple_text_tertiary"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tvFat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-- g"
+                        android:textColor="@color/apple_text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="-0.01"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="@color/apple_danger"
+                        android:layout_marginBottom="6dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="碳水"
+                        android:textColor="@color/apple_text_tertiary"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tvCarbs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-- g"
+                        android:textColor="@color/apple_text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="-0.01"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ═══ API Key 设置区 ═══ -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,13 +440,14 @@
             android:textColor="@color/apple_text_secondary"
             android:textSize="13sp"
             android:letterSpacing="-0.01"
+            android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="20dp">
 
             <EditText
                 android:id="@+id/etApiKey"
@@ -79,7 +476,7 @@
                 android:paddingEnd="20dp" />
         </LinearLayout>
 
-        <!-- 编辑档案 -->
+        <!-- 操作按钮 -->
         <Button
             android:id="@+id/btnEditProfile"
             android:layout_width="match_parent"
@@ -89,9 +486,8 @@
             android:textSize="15sp"
             android:textAllCaps="false"
             android:background="@drawable/bg_apple_button_secondary"
-            android:layout_marginTop="8dp" />
+            android:layout_marginBottom="8dp" />
 
-        <!-- 返回 -->
         <Button
             android:id="@+id/btnBack"
             android:layout_width="match_parent"
@@ -101,7 +497,16 @@
             android:textSize="15sp"
             android:textAllCaps="false"
             android:background="@drawable/bg_apple_button_secondary"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FitDiet v1.0  ·  com.esn.fitdiet"
+            android:textColor="@color/apple_text_tertiary"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:layout_marginTop="24dp" />
 
     </LinearLayout>
 </ScrollView>

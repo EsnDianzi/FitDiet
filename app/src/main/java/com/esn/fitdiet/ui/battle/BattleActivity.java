@@ -379,23 +379,34 @@ public class BattleActivity extends AppCompatActivity {
             int totalExp = (after != null && before != null) ? after.totalExp - before.totalExp : 0;
             int totalCoins = (after != null && before != null) ? after.coins - before.coins : 0;
 
-            StringBuilder msg = new StringBuilder();
-            msg.append("训练完成！\n\n");
-            msg.append(String.format(Locale.getDefault(), "经验 +%d\n", totalExp));
-            msg.append(String.format(Locale.getDefault(), "金币 +%d\n", totalCoins));
-            msg.append(String.format(Locale.getDefault(), "连续打卡 %d 天\n", newStreak));
-            if (newLevel > oldLevel) {
-                msg.append(String.format(Locale.getDefault(), "\n🎉 等级提升! Lv.%d → Lv.%d\n", oldLevel, newLevel));
-            }
-
-            AppExecutors.getInstance().mainThread().execute(() ->
-                    new AlertDialog.Builder(this)
-                            .setTitle("训练结算")
-                            .setMessage(msg.toString())
-                            .setPositiveButton("返回首页", (d, w) -> finish())
-                            .setCancelable(false)
-                            .show());
+            final int finalExp = totalExp, finalCoins = totalCoins;
+            final int finalNewLevel = newLevel, finalOldLevel = oldLevel, finalStreak = newStreak;
+            AppExecutors.getInstance().mainThread().execute(() -> showRewardDialog(
+                    finalExp, finalCoins, finalStreak, finalOldLevel, finalNewLevel));
         });
+    }
+
+    /** 自定义奖励弹窗（卡片式，比纯文本更美观） */
+    private void showRewardDialog(int exp, int coins, int streak, int oldLevel, int newLevel) {
+        View view = getLayoutInflater().inflate(R.layout.dialog_battle_result, null);
+        ((TextView) view.findViewById(R.id.tvRewardExp)).setText("+" + exp);
+        ((TextView) view.findViewById(R.id.tvRewardCoins)).setText("+" + coins);
+        ((TextView) view.findViewById(R.id.tvRewardStreak)).setText(streak + " 天");
+
+        View levelUpContainer = view.findViewById(R.id.levelUpContainer);
+        if (newLevel > oldLevel) {
+            levelUpContainer.setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.tvRewardLevel))
+                    .setText("Lv." + oldLevel + " → Lv." + newLevel);
+        } else {
+            levelUpContainer.setVisibility(View.GONE);
+        }
+
+        new AlertDialog.Builder(this)
+                .setView(view)
+                .setPositiveButton("返回首页", (d, w) -> finish())
+                .setCancelable(false)
+                .show();
     }
 
     /** 肌群 → 精灵图 */

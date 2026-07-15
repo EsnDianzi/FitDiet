@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/apple_surface"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="训练完成"
+        android:textColor="@color/apple_text_primary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:letterSpacing="-0.02"
+        android:layout_marginBottom="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="14dp"
+            android:background="@color/apple_bg"
+            android:layout_marginEnd="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="经验"
+                android:textColor="@color/apple_text_tertiary"
+                android:textSize="11sp" />
+            <TextView
+                android:id="@+id/tvRewardExp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+0"
+                android:textColor="@color/apple_accent"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="14dp"
+            android:background="@color/apple_bg"
+            android:layout_marginStart="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="金币"
+                android:textColor="@color/apple_text_tertiary"
+                android:textSize="11sp" />
+            <TextView
+                android:id="@+id/tvRewardCoins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+0"
+                android:textColor="@color/apple_warning"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="14dp"
+        android:background="@color/apple_bg">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="连续打卡"
+                android:textColor="@color/apple_text_tertiary"
+                android:textSize="11sp" />
+            <TextView
+                android:id="@+id/tvRewardStreak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 天"
+                android:textColor="@color/apple_text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.01"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/levelUpContainer">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="等级提升"
+                android:textColor="@color/apple_text_tertiary"
+                android:textSize="11sp" />
+            <TextView
+                android:id="@+id/tvRewardLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lv.1 → Lv.2"
+                android:textColor="@color/apple_accent"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
