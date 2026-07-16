@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 今日饮食分组头（按早/午/晚/加餐分组，Apple 暗色风格） -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_marginTop="18dp"
+    android:layout_marginBottom="4dp">
+
+    <!-- 左侧 accent 竖条 -->
+    <View
+        android:layout_width="3dp"
+        android:layout_height="16dp"
+        android:background="@color/apple_accent"
+        android:layout_marginEnd="8dp" />
+
+    <!-- 餐次名称 -->
+    <TextView
+        android:id="@+id/tvMealName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="早餐"
+        android:textColor="@color/apple_text_primary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:letterSpacing="-0.01" />
+
+    <!-- 右侧：项数 · 热量小计 -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tvMealMeta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 kcal"
+        android:textColor="@color/apple_text_tertiary"
+        android:textSize="12sp"
+        android:letterSpacing="0.02" />
+
+</LinearLayout>

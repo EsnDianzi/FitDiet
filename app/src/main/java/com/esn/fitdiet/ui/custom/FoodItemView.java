@@ -39,6 +39,11 @@ public class FoodItemView extends LinearLayout {
         barFat = findViewById(R.id.barFat);
     }
 
+    /** 分组场景下隐藏卡片自带餐次标签（餐次已由分组头承载）。 */
+    public void setMealTagVisible(boolean visible) {
+        tvMealType.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
     public void setData(FoodLog f) {
         // 餐次
         tvMealType.setText(mealLabel(f.mealType));

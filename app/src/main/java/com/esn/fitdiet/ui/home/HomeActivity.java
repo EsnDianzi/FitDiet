@@ -9,6 +9,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import android.view.LayoutInflater;
+import android.view.View;
+
 import com.esn.fitdiet.MainApplication;
 import com.esn.fitdiet.R;
 import com.esn.fitdiet.data.local.entity.DailySummary;
@@ -16,8 +19,10 @@ import com.esn.fitdiet.data.local.entity.FoodLog;
 import com.esn.fitdiet.data.local.entity.LevelProgress;
 import com.esn.fitdiet.data.repository.AppContainer;
 import com.esn.fitdiet.databinding.ActivityHomeBinding;
+import com.esn.fitdiet.domain.model.MealType;
 import com.esn.fitdiet.ui.achievements.AchievementsActivity;
 import com.esn.fitdiet.ui.battle.BattleActivity;
+import com.esn.fitdiet.ui.custom.FoodItemView;
 import com.esn.fitdiet.ui.diet.FoodRecognitionActivity;
 import com.esn.fitdiet.ui.main.HomeViewModel;
 import com.esn.fitdiet.ui.onboarding.OnboardingActivity;
@@ -25,8 +30,11 @@ import com.esn.fitdiet.ui.profile.ProfileActivity;
 import com.esn.fitdiet.ui.stats.StatsActivity;
 import com.esn.fitdiet.util.AppExecutors;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * FitDiet 主页（MVVM）。
@@ -132,7 +140,7 @@ public class HomeActivity extends AppCompatActivity {
         };
         vm.todaySummary().observe(this, summaryObserver);
 
-        // ── 当日饮食 LiveData（卡片式） ──
+        // ── 当日饮食 LiveData（按早 / 午 / 晚 / 加餐 分组） ──
         foodObserver = foods -> {
             LinearLayout listContainer = binding.foodListContainer;
             listContainer.removeAllViews();
@@ -145,12 +153,44 @@ public class HomeActivity extends AppCompatActivity {
                 listContainer.addView(empty);
                 return;
             }
-            for (int i = 0; i < foods.size(); i++) {
-                FoodLog f = foods.get(i);
-                com.esn.fitdiet.ui.custom.FoodItemView card =
-                        new com.esn.fitdiet.ui.custom.FoodItemView(this);
-                card.setData(f);
-                listContainer.addView(card);
+            // 固定餐次展示顺序：早 → 午 → 晚 → 加餐。
+            // 注意：DAO 的 ORDER BY mealType 为枚举字符串字母序（BREAKFAST/DINNER/LUNCH/SNACK），
+            // 与展示序不一致，故在此按枚举自然序显式分组。
+            MealType[] mealOrder = {
+                    MealType.BREAKFAST, MealType.LUNCH, MealType.DINNER, MealType.SNACK
+            };
+            Map<MealType, List<FoodLog>> groups = new LinkedHashMap<>();
+            for (MealType m : mealOrder) {
+                groups.put(m, new ArrayList<>());
+            }
+            for (FoodLog f : foods) {
+                MealType key = (f.mealType != null) ? f.mealType : MealType.SNACK;
+                groups.get(key).add(f);
+            }
+
+            LayoutInflater inflater = getLayoutInflater();
+            for (MealType m : mealOrder) {
+                List<FoodLog> group = groups.get(m);
+                if (group.isEmpty()) continue;
+                // 组内按录入时间升序
+                group.sort((a, b) -> Long.compare(a.createdAt, b.createdAt));
+
+                // 分组头：餐次名 + 项数 · 热量小计
+                View header = inflater.inflate(R.layout.item_meal_section, listContainer, false);
+                ((TextView) header.findViewById(R.id.tvMealName)).setText(m.getLabel());
+                double kcal = 0;
+                for (FoodLog f : group) kcal += f.calories;
+                ((TextView) header.findViewById(R.id.tvMealMeta)).setText(
+                        String.format(Locale.getDefault(), "%d 项 · %.0f kcal", group.size(), kcal));
+                listContainer.addView(header);
+
+                // 组内卡片（隐藏卡片自带餐次标签，避免与分组头重复）
+                for (FoodLog f : group) {
+                    FoodItemView card = new FoodItemView(this);
+                    card.setMealTagVisible(false);
+                    card.setData(f);
+                    listContainer.addView(card);
+                }
             }
         };
         vm.todayFood().observe(this, foodObserver);
