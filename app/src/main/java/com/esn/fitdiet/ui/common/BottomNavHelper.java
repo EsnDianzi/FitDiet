@@ -2,8 +2,14 @@ package com.esn.fitdiet.ui.common;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.ImageViewCompat;
 
 import com.esn.fitdiet.R;
 import com.esn.fitdiet.ui.battle.BattleActivity;
@@ -18,27 +24,28 @@ import com.esn.fitdiet.ui.stats.StatsActivity;
  *
  * <p>行为：
  * <ul>
- *   <li>当前页对应的 tab 高亮（accent 绿）</li>
- *   <li>点击 tab 跳转：目标 = 当前页 → finish()；其他页 → startActivity + finish()</li>
+ *   <li>当前页对应的 tab 高亮（accent 绿，图标 + 文字同步变色）</li>
+ *   <li>点击 tab 跳转：目标 = 当前页 → 消费；其他页 → startActivity + finish()</li>
  * </ul>
  */
 public final class BottomNavHelper {
 
     private BottomNavHelper() { }
 
-    /** 5 个 tab 标签 TextView，按 home/diet/train/stats/profile 顺序。 */
+    /** 5 个 tab 标签，按 home/diet/train/stats/profile 顺序。 */
     private enum Tab { HOME, DIET, TRAIN, STATS, PROFILE }
 
     /** 当前 Activity 绑定 5 个 tab 的点击事件 + 高亮当前页。 */
     public static void bind(Activity activity, View navBar) {
         if (navBar == null) return;
-        TextView btnHome = navBar.findViewById(R.id.btnTabHome);
-        TextView btnDiet = navBar.findViewById(R.id.btnTabDiet);
-        TextView btnTrain = navBar.findViewById(R.id.btnTabTrain);
-        TextView btnStats = navBar.findViewById(R.id.btnTabStats);
-        TextView btnProfile = navBar.findViewById(R.id.btnTabProfile);
 
-        // 高亮当前 tab
+        LinearLayout btnHome = navBar.findViewById(R.id.btnTabHome);
+        LinearLayout btnDiet = navBar.findViewById(R.id.btnTabDiet);
+        LinearLayout btnTrain = navBar.findViewById(R.id.btnTabTrain);
+        LinearLayout btnStats = navBar.findViewById(R.id.btnTabStats);
+        LinearLayout btnProfile = navBar.findViewById(R.id.btnTabProfile);
+
+        // 高亮当前 tab（图标 + 文字同步变色）
         Tab current = detectCurrent(activity);
         highlight(btnHome, current == Tab.HOME);
         highlight(btnDiet, current == Tab.DIET);
@@ -75,9 +82,23 @@ public final class BottomNavHelper {
         from.finish();
     }
 
-    private static void highlight(TextView tv, boolean active) {
-        tv.setTextColor(active
-                ? tv.getResources().getColor(R.color.apple_accent)
-                : tv.getResources().getColor(R.color.apple_text_tertiary));
+    /**
+     * 高亮 / 取消高亮 tab：
+     * - 激活：图标 + 文字均变 accent 绿
+     * - 未激活：图标 + 文字均为三级灰
+     */
+    private static void highlight(LinearLayout tab, boolean active) {
+        if (tab == null) return;
+        int color = ContextCompat.getColor(tab.getContext(),
+                active ? R.color.apple_accent : R.color.apple_text_tertiary);
+        // tab 内有 1 个 ImageView + 1 个 TextView
+        for (int i = 0; i < tab.getChildCount(); i++) {
+            View child = tab.getChildAt(i);
+            if (child instanceof ImageView) {
+                ImageViewCompat.setImageTintList((ImageView) child, ColorStateList.valueOf(color));
+            } else if (child instanceof TextView) {
+                ((TextView) child).setTextColor(color);
+            }
+        }
     }
 }

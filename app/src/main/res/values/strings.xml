@@ -11,9 +11,12 @@
 
     <!-- 主页 -->
     <string name="home_title">今日概览</string>
-    <string name="home_net_calories">净热量</string>
+    <string name="home_net_calories">今日净热量</string>
+    <string name="home_surplus">今日热量盈余</string>
+    <string name="home_deficit">今日热量缺口</string>
     <string name="home_intake">摄入</string>
     <string name="home_burned">消耗</string>
+    <string name="home_bmr">基础代谢</string>
     <string name="home_level">Lv.%d</string>
     <string name="home_food_today">今日饮食</string>
     <string name="home_empty_food">还没有记录，去拍张照吧！</string>

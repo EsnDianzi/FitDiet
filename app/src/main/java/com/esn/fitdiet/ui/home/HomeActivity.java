@@ -97,8 +97,24 @@ public class HomeActivity extends AppCompatActivity {
     private void setupObservers() {
         summaryObserver = summary -> {
             if (summary != null) {
+                double net = summary.netCalories;
+                // net > 0 → 热量盈余（红）; net < 0 → 热量缺口（绿）; = 0 → 中性
+                int valueColor;
+                int labelRes;
+                if (net > 0.5) {
+                    valueColor = getColor(R.color.apple_danger);
+                    labelRes = R.string.home_surplus;
+                } else if (net < -0.5) {
+                    valueColor = getColor(R.color.apple_accent);
+                    labelRes = R.string.home_deficit;
+                } else {
+                    valueColor = getColor(R.color.apple_text_secondary);
+                    labelRes = R.string.home_net_calories;
+                }
+                binding.tvSummaryLabel.setText(labelRes);
+                binding.tvNetCalories.setTextColor(valueColor);
                 binding.tvNetCalories.setText(String.format(Locale.getDefault(),
-                        "%.0f kcal", summary.netCalories));
+                        "%+.0f kcal", net));
                 binding.tvIntake.setText(String.format(Locale.getDefault(),
                         "摄入 %.0f", summary.intakeCalories));
                 binding.tvBmr.setText(String.format(Locale.getDefault(),
