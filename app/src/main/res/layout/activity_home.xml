@@ -82,12 +82,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="4dp" />
 
+                <TextView
+                    android:id="@+id/tvFormula"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="基础代谢 + 日常消耗 + 训练消耗 - 摄入"
+                    android:textColor="@color/apple_text_tertiary"
+                    android:textSize="12sp"
+                    android:letterSpacing="-0.01"
+                    android:lineSpacingMultiplier="1.4"
+                    app:layout_constraintTop_toBottomOf="@id/tvNetCalories"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp" />
+
                 <LinearLayout
                     android:id="@+id/ioRow"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/tvNetCalories"
+                    app:layout_constraintTop_toBottomOf="@id/tvFormula"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="12dp">
@@ -125,6 +139,10 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:letterSpacing="-0.02"
+                android:drawableStart="@drawable/ic_restaurant"
+                android:drawableTint="@color/apple_accent"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
                 app:layout_constraintTop_toBottomOf="@id/cardSummary"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="28dp" />

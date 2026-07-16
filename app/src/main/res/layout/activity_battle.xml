@@ -31,6 +31,10 @@
             android:textSize="28sp"
             android:textStyle="bold"
             android:letterSpacing="-0.02"
+            android:drawableStart="@drawable/ic_fitness_center"
+            android:drawableTint="#34C759"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -54,6 +58,10 @@
             android:textColor="#cccccc"
             android:textSize="14sp"
             android:letterSpacing="-0.01"
+            android:drawableStart="@drawable/ic_check_circle"
+            android:drawableTint="#cccccc"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
             app:layout_constraintTop_toBottomOf="@id/tvPageTitle"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="32dp" />
@@ -142,6 +150,10 @@
             android:text="或自选肌群"
             android:textColor="#999999"
             android:textSize="12sp"
+            android:drawableStart="@drawable/ic_edit"
+            android:drawableTint="#999999"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
             app:layout_constraintTop_toBottomOf="@id/comboPresets"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="24dp" />
@@ -206,6 +218,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="12dp" />
+
+        <!-- 开始训练按钮 -->
+        <Button
+            android:id="@+id/btnStartBattle"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:text="开始训练"
+            android:textColor="#ffffff"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_battle_primary"
+            android:drawableStart="@drawable/ic_play_arrow"
+            android:drawableTint="#ffffff"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:gravity="start|center_vertical"
+            android:enabled="false"
+            android:alpha="0.45"
+            app:layout_constraintTop_toBottomOf="@id/tvSelectedMuscles"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp" />
 
         <!-- ===== 战斗区域（战斗开始后可见） ===== -->
         <androidx.constraintlayout.widget.ConstraintLayout

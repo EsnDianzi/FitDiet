@@ -73,8 +73,6 @@ public class StatsActivity extends AppCompatActivity {
             });
         });
 
-        binding.btnBack.setOnClickListener(v -> finish());
-
         // 绑定底部导航栏
         com.esn.fitdiet.ui.common.BottomNavHelper.bind(this, findViewById(R.id.navBar));
     }
@@ -92,32 +90,75 @@ public class StatsActivity extends AppCompatActivity {
 
         for (int i = 0; i < logs.size(); i++) {
             ExerciseLog log = logs.get(i);
-            TextView row = new TextView(this);
-            row.setText(formatExerciseRow(log));
-            row.setTextColor(getColor(R.color.apple_text_primary));
-            row.setTextSize(14);
-            row.setLetterSpacing(-0.01f);
-            row.setPadding(16, 12, 16, 12);
-            // 连续卡片组：首/末项带圆角，中间行用纯色
-            boolean isFirst = (i == 0);
-            boolean isLast = (i == logs.size() - 1);
-            int bgRes;
-            if (isFirst && isLast) bgRes = R.drawable.bg_apple_card;
-            else if (isFirst) bgRes = R.drawable.bg_apple_card_top;
-            else if (isLast) bgRes = R.drawable.bg_apple_card_bottom;
-            else {
-                row.setBackgroundColor(getColor(R.color.apple_surface));
-                row.setPadding(16, 12, 16, 12);
-                container.addView(row);
-                continue;
-            }
-            row.setBackgroundResource(bgRes);
-            container.addView(row);
+            container.addView(buildExerciseCard(log, i, logs.size()));
         }
     }
 
+    private android.widget.LinearLayout buildExerciseCard(ExerciseLog log, int position, int total) {
+        android.widget.LinearLayout card = new android.widget.LinearLayout(this);
+        card.setOrientation(android.widget.LinearLayout.HORIZONTAL);
+        card.setPadding(20, 16, 20, 16);
+
+        boolean isFirst = (position == 0);
+        boolean isLast = (position == total - 1);
+        int bgRes;
+        if (isFirst && isLast) bgRes = R.drawable.bg_apple_card;
+        else if (isFirst) bgRes = R.drawable.bg_apple_card_top;
+        else if (isLast) bgRes = R.drawable.bg_apple_card_bottom;
+        else bgRes = 0;
+        if (bgRes != 0) {
+            card.setBackgroundResource(bgRes);
+        } else {
+            card.setBackgroundColor(getColor(R.color.apple_surface));
+        }
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 0, 0, isLast ? 0 : 1);
+        card.setLayoutParams(params);
+
+        // 左侧图标
+        android.widget.ImageView icon = new android.widget.ImageView(this);
+        icon.setImageResource(R.drawable.ic_fitness_center);
+        icon.setColorFilter(getColor(R.color.apple_accent));
+        int iconSize = (int) (24 * getResources().getDisplayMetrics().density);
+        icon.setLayoutParams(new LinearLayout.LayoutParams(iconSize, iconSize));
+        icon.setPadding(0, 0, 16, 0);
+        card.addView(icon);
+
+        // 文字区
+        android.widget.LinearLayout textCol = new android.widget.LinearLayout(this);
+        textCol.setOrientation(android.widget.LinearLayout.VERTICAL);
+        textCol.setLayoutParams(new LinearLayout.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+
+        TextView title = new TextView(this);
+        String date = (log.date != null && log.date.length() >= 10)
+                ? log.date.substring(5) : log.date;
+        title.setText(String.format(Locale.getDefault(), "%s  ·  %s", date,
+                log.muscleGroup != null ? log.muscleGroup : log.monsterName));
+        title.setTextColor(getColor(R.color.apple_text_primary));
+        title.setTextSize(15);
+        title.setLetterSpacing(-0.01f);
+        title.setTypeface(title.getTypeface(), android.graphics.Typeface.BOLD);
+        textCol.addView(title);
+
+        TextView detail = new TextView(this);
+        detail.setText(String.format(Locale.getDefault(), "%d/%d 组  ·  %d 分钟  ·  %.0f kcal",
+                log.completedRounds, log.totalRounds, log.durationMin, log.caloriesBurned));
+        detail.setTextColor(getColor(R.color.apple_text_secondary));
+        detail.setTextSize(12);
+        detail.setLetterSpacing(-0.01f);
+        detail.setPadding(0, 4, 0, 0);
+        textCol.addView(detail);
+
+        card.addView(textCol);
+        return card;
+    }
+
     private String formatExerciseRow(ExerciseLog log) {
-        // "07-15  胸  4 组  20 min  120 kcal"
+        // 已弃用，保留兼容
         String date = (log.date != null && log.date.length() >= 10)
                 ? log.date.substring(5) : log.date;
         StringBuilder sb = new StringBuilder();

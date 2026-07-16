@@ -32,11 +32,12 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * 训练/Boss 战页面（重写版 v2）。
+ * 训练/Boss 战页面（重写版 v3）。
  *
  * <p>交互流程：
  * <ol>
- *   <li>选择预设组合或自选肌群 → 点"开始训练"</li>
+ *   <li>选择预设组合 或 自选肌群（可多选 / toggle）</li>
+ *   <li>点击"开始训练"进入战斗</li>
  *   <li>第 1 个肌群 Boss 出现（血条 = 动作数）</li>
  *   <li>完成一组实际动作后点"完成一组" → 血条 -1 → 自动进入组间休息倒计时（60s）</li>
  *   <li>休息结束或跳过 → 可继续下一组</li>
@@ -69,6 +70,10 @@ public class BattleActivity extends AppCompatActivity {
             {"胸", "背", "腿", "肩", "臂", "核心"}  // 全身
     };
 
+    private Button[] presetButtons;
+    private Button[] muscleButtons;
+    private int selectedPresetIndex = -1; // -1 表示未选择预设
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +90,9 @@ public class BattleActivity extends AppCompatActivity {
         // ── 自定义肌群按钮 ──
         setupMuscleButtons();
 
+        // ── 开始训练 ──
+        binding.btnStartBattle.setOnClickListener(v -> startBattle());
+
         // ── 战斗按钮 ──
         binding.btnCompleteRound.setOnClickListener(v -> onCompleteRound());
         binding.btnSkipRest.setOnClickListener(v -> onSkipRest());
@@ -93,37 +101,81 @@ public class BattleActivity extends AppCompatActivity {
 
         // 绑定底部导航栏
         com.esn.fitdiet.ui.common.BottomNavHelper.bind(this, findViewById(R.id.navBar));
+
+        // 初始状态：无选择
+        updateSelectionUI();
     }
 
     /** 绑定 5 个预设组合按钮 */
     private void setupPresetButtons() {
-        Button[] presets = {
+        presetButtons = new Button[]{
                 binding.btnPresetChestBi,
                 binding.btnPresetBackTri,
                 binding.btnPresetLegs,
                 binding.btnPresetShoulderCore,
                 binding.btnPresetFullBody
         };
-        for (int i = 0; i < presets.length; i++) {
-            final String[] muscles = PRESET_COMBOS[i];
-            presets[i].setOnClickListener(v -> selectPreset(muscles));
+        for (int i = 0; i < presetButtons.length; i++) {
+            final int idx = i;
+            presetButtons[i].setOnClickListener(v -> selectPreset(idx));
         }
     }
 
-    /** 选择预设组合 */
-    private void selectPreset(String[] muscles) {
+    /** 选择预设组合（覆盖当前自定义选择） */
+    private void selectPreset(int presetIndex) {
+        selectedPresetIndex = presetIndex;
         groupPlans.clear();
+        String[] muscles = PRESET_COMBOS[presetIndex];
         for (String mg : muscles) {
-            int rounds = defaultRoundsForMuscle(mg);
-            MonsterDef m = new MonsterDef();
-            m.name = mg + "部 Boss";
-            m.muscleGroup = mg;
-            m.difficulty = roundsToDifficulty(rounds);
-            m.iconRes = getIconForMuscle(mg);
-            groupPlans.add(new BattleManager.GroupPlan(m, rounds));
+            groupPlans.add(createGroupPlan(mg));
         }
-        updateSelectedDisplay();
-        startBattle();
+        updateSelectionUI();
+        Toast.makeText(this, "已选择：" + presetButtons[presetIndex].getText(), Toast.LENGTH_SHORT).show();
+    }
+
+    /** 肌群选择按钮（toggle 多选） */
+    private void setupMuscleButtons() {
+        muscleButtons = new Button[]{
+                binding.btnMuscle1, binding.btnMuscle2, binding.btnMuscle3,
+                binding.btnMuscle4, binding.btnMuscle5, binding.btnMuscle6
+        };
+        for (int i = 0; i < muscleButtons.length; i++) {
+            final String mg = MUSCLE_GROUPS[i];
+            muscleButtons[i].setOnClickListener(v -> toggleCustomMuscle(mg));
+        }
+    }
+
+    /** 自选肌群 toggle：在列表中存在则移除，否则追加 */
+    private void toggleCustomMuscle(String muscleGroup) {
+        // 一旦自定义选择，就取消预设高亮
+        selectedPresetIndex = -1;
+
+        int existingIdx = findGroupIndex(muscleGroup);
+        if (existingIdx >= 0) {
+            groupPlans.remove(existingIdx);
+        } else {
+            groupPlans.add(createGroupPlan(muscleGroup));
+        }
+        updateSelectionUI();
+    }
+
+    private int findGroupIndex(String muscleGroup) {
+        for (int i = 0; i < groupPlans.size(); i++) {
+            if (muscleGroup.equals(groupPlans.get(i).monster.muscleGroup)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private BattleManager.GroupPlan createGroupPlan(String muscleGroup) {
+        int rounds = defaultRoundsForMuscle(muscleGroup);
+        MonsterDef m = new MonsterDef();
+        m.name = muscleGroup + "部 Boss";
+        m.muscleGroup = muscleGroup;
+        m.difficulty = roundsToDifficulty(rounds);
+        m.iconRes = getIconForMuscle(muscleGroup);
+        return new BattleManager.GroupPlan(m, rounds);
     }
 
     /** 肌群 → 默认动作数（PRD: 大肌群 4-5, 中 3-4, 小 2-3） */
@@ -144,40 +196,45 @@ public class BattleActivity extends AppCompatActivity {
         return 5;
     }
 
-    /** 肌群选择按钮 */
-    private void setupMuscleButtons() {
-        Button[] buttons = {
-                binding.btnMuscle1, binding.btnMuscle2, binding.btnMuscle3,
-                binding.btnMuscle4, binding.btnMuscle5, binding.btnMuscle6
-        };
-        for (int i = 0; i < buttons.length; i++) {
-            final String mg = MUSCLE_GROUPS[i];
-            final int rounds = defaultRoundsForMuscle(mg);
-            buttons[i].setOnClickListener(v -> addCustomMuscle(mg, rounds));
+    /** 更新选择区 UI：摘要文字 + 按钮高亮 + 开始按钮状态 */
+    private void updateSelectionUI() {
+        // 摘要
+        if (groupPlans.isEmpty()) {
+            binding.tvSelectedMuscles.setText("请选择训练肌群");
+            binding.tvSelectedMuscles.setTextColor(getColor(R.color.apple_text_tertiary));
+        } else {
+            StringBuilder sb = new StringBuilder("已选: ");
+            for (int i = 0; i < groupPlans.size(); i++) {
+                if (i > 0) sb.append(" → ");
+                sb.append(groupPlans.get(i).monster.muscleGroup)
+                        .append("(").append(groupPlans.get(i).rounds).append("组)");
+            }
+            binding.tvSelectedMuscles.setText(sb.toString());
+            binding.tvSelectedMuscles.setTextColor(getColor(R.color.apple_accent));
         }
-    }
 
-    /** 自选肌群加入计划 */
-    private void addCustomMuscle(String muscleGroup, int rounds) {
-        MonsterDef m = new MonsterDef();
-        m.name = muscleGroup + "部 Boss";
-        m.muscleGroup = muscleGroup;
-        m.difficulty = roundsToDifficulty(rounds);
-        m.iconRes = getIconForMuscle(muscleGroup);
-        groupPlans.add(new BattleManager.GroupPlan(m, rounds));
-        Toast.makeText(this, "已加入: " + muscleGroup + " (" + rounds + "组)", Toast.LENGTH_SHORT).show();
-        updateSelectedDisplay();
-    }
-
-    /** 更新已选肌群显示 */
-    private void updateSelectedDisplay() {
-        StringBuilder sb = new StringBuilder("已选: ");
-        for (int i = 0; i < groupPlans.size(); i++) {
-            if (i > 0) sb.append(" → ");
-            sb.append(groupPlans.get(i).monster.muscleGroup)
-                    .append("(").append(groupPlans.get(i).rounds).append("组)");
+        // 预设按钮高亮
+        for (int i = 0; i < presetButtons.length; i++) {
+            boolean active = (i == selectedPresetIndex);
+            presetButtons[i].setBackgroundResource(active
+                    ? R.drawable.bg_battle_preset_selected
+                    : R.drawable.bg_battle_preset);
+            presetButtons[i].setTextColor(active ? getColor(R.color.apple_accent) : Color.WHITE);
         }
-        binding.tvSelectedMuscles.setText(sb.toString());
+
+        // 自定义肌群按钮高亮
+        for (int i = 0; i < muscleButtons.length; i++) {
+            boolean active = findGroupIndex(MUSCLE_GROUPS[i]) >= 0;
+            muscleButtons[i].setBackgroundResource(active
+                    ? R.drawable.bg_battle_muscle_selected
+                    : R.drawable.bg_battle_muscle);
+            muscleButtons[i].setTextColor(active ? Color.BLACK : Color.WHITE);
+        }
+
+        // 开始按钮状态
+        boolean hasSelection = !groupPlans.isEmpty();
+        binding.btnStartBattle.setEnabled(hasSelection);
+        binding.btnStartBattle.setAlpha(hasSelection ? 1.0f : 0.45f);
     }
 
     /** 开始战斗 */
@@ -192,11 +249,14 @@ public class BattleActivity extends AppCompatActivity {
         session.startAction(); // → ACTION_ACTIVE
 
         // 隐藏选择区，显示战斗区
+        binding.tvPageTitle.setText("训练中");
         binding.comboPresets.setVisibility(View.GONE);
         binding.tvComboLabel.setVisibility(View.GONE);
         binding.tvCustomLabel.setVisibility(View.GONE);
         binding.customMuscleRow1.setVisibility(View.GONE);
         binding.customMuscleRow2.setVisibility(View.GONE);
+        binding.tvSelectedMuscles.setVisibility(View.GONE);
+        binding.btnStartBattle.setVisibility(View.GONE);
         binding.battleArea.setVisibility(View.VISIBLE);
 
         updateBattleUI();

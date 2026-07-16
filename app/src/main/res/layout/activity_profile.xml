@@ -20,6 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:descendantFocusability="beforeDescendants"
         android:padding="24dp">
 
         <!-- 标题 -->
@@ -31,6 +34,10 @@
             android:textSize="28sp"
             android:textStyle="bold"
             android:letterSpacing="-0.02"
+            android:drawableStart="@drawable/ic_account_circle"
+            android:drawableTint="@color/apple_accent"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
             android:layout_marginBottom="20dp" />
 
         <!-- ═══ 基础信息卡（2x2 网格） ═══ -->
@@ -50,6 +57,10 @@
                 android:textSize="12sp"
                 android:letterSpacing="0.02"
                 android:textAllCaps="true"
+                android:drawableStart="@drawable/ic_person"
+                android:drawableTint="@color/apple_text_tertiary"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
                 android:layout_marginBottom="12dp" />
 
             <LinearLayout
@@ -175,6 +186,10 @@
                 android:textSize="12sp"
                 android:letterSpacing="0.02"
                 android:textAllCaps="true"
+                android:drawableStart="@drawable/ic_track"
+                android:drawableTint="@color/apple_text_tertiary"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
                 android:layout_marginBottom="12dp" />
 
             <LinearLayout
@@ -260,6 +275,10 @@
                 android:textSize="12sp"
                 android:letterSpacing="0.02"
                 android:textAllCaps="true"
+                android:drawableStart="@drawable/ic_restaurant"
+                android:drawableTint="@color/apple_text_tertiary"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
                 android:layout_marginBottom="12dp" />
 
             <!-- 目标热量（大字突出） -->
@@ -450,6 +469,9 @@
             android:textColor="@color/apple_text_secondary"
             android:textSize="13sp"
             android:letterSpacing="-0.01"
+            android:drawableStart="@drawable/ic_key"
+            android:drawableTint="@color/apple_text_secondary"
+            android:drawablePadding="8dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp" />
 
@@ -472,18 +494,21 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp" />
 
-            <Button
-                android:id="@+id/btnSaveKey"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="保存"
-                android:textColor="@color/apple_text_primary"
-                android:textSize="14sp"
-                android:textAllCaps="false"
-                android:background="@drawable/bg_apple_button"
-                android:layout_marginStart="8dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp" />
+        <Button
+            android:id="@+id/btnSaveKey"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="保存"
+            android:textColor="@color/apple_text_primary"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_apple_button"
+            android:drawableStart="@drawable/ic_check"
+            android:drawableTint="@color/apple_text_primary"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:gravity="start|center_vertical"
+            android:layout_marginStart="8dp" />
         </LinearLayout>
 
         <!-- 操作按钮 -->
@@ -496,6 +521,11 @@
             android:textSize="15sp"
             android:textAllCaps="false"
             android:background="@drawable/bg_apple_button_secondary"
+            android:drawableStart="@drawable/ic_edit"
+            android:drawableTint="@color/apple_text_primary"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:gravity="start|center_vertical"
             android:layout_marginBottom="8dp" />
 
         <Button

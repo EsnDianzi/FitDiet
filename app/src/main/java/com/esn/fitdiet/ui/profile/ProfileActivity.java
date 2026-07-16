@@ -35,6 +35,9 @@ public class ProfileActivity extends AppCompatActivity {
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // 阻止 EditText 自动抢占焦点
+        binding.getRoot().requestFocus();
+
         // ── 加载当前档案 ──
         loadProfileSummary();
 

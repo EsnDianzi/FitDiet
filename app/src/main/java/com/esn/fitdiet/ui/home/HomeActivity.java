@@ -115,6 +115,13 @@ public class HomeActivity extends AppCompatActivity {
                 binding.tvNetCalories.setTextColor(valueColor);
                 binding.tvNetCalories.setText(String.format(Locale.getDefault(),
                         "%+.0f kcal", net));
+                binding.tvFormula.setText(String.format(Locale.getDefault(),
+                        "基础代谢(%.0f) + 日常消耗(%.0f)%s - 摄入(%.0f)",
+                        summary.bmrCalories,
+                        summary.dailyActivityCalories,
+                        summary.exerciseCalories > 0 ? String.format(Locale.getDefault(),
+                                " + 训练消耗(%.0f)", summary.exerciseCalories) : "",
+                        summary.intakeCalories));
                 binding.tvIntake.setText(String.format(Locale.getDefault(),
                         "摄入 %.0f", summary.intakeCalories));
                 binding.tvBmr.setText(String.format(Locale.getDefault(),

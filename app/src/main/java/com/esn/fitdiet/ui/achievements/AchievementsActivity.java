@@ -47,8 +47,9 @@ public class AchievementsActivity extends AppCompatActivity {
 
             AppExecutors.getInstance().mainThread().execute(() -> {
                 LinearLayout container = binding.achievementContainer;
-                for (StatsRepository.Achievement a : achievements) {
-                    container.addView(buildAchievementCard(a));
+                container.removeAllViews();
+                for (int i = 0; i < achievements.size(); i++) {
+                    container.addView(buildAchievementCard(achievements.get(i), i, achievements.size()));
                 }
             });
         });
@@ -60,23 +61,36 @@ public class AchievementsActivity extends AppCompatActivity {
      * 构建单个成就卡片。
      *
      * @param a 成就对象（id/title/unlocked/desc）
+     * @param position 当前位置
+     * @param total 总数
      * @return 带样式的卡片 LinearLayout
      */
-    private LinearLayout buildAchievementCard(StatsRepository.Achievement a) {
+    private LinearLayout buildAchievementCard(StatsRepository.Achievement a, int position, int total) {
         LinearLayout card = new LinearLayout(this);
         card.setOrientation(LinearLayout.HORIZONTAL);
-        card.setPadding(20, 16, 20, 16);
-        card.setBackgroundColor(a.unlocked
-                ? getColor(R.color.apple_surface)
-                : getColor(R.color.apple_surface_alt));
+        card.setPadding(20, 18, 20, 18);
+
+        // 连续卡片组：首/末项带圆角，中间行用纯色
+        int bgRes;
+        boolean isFirst = (position == 0);
+        boolean isLast = (position == total - 1);
+        if (isFirst && isLast) bgRes = R.drawable.bg_apple_card;
+        else if (isFirst) bgRes = R.drawable.bg_apple_card_top;
+        else if (isLast) bgRes = R.drawable.bg_apple_card_bottom;
+        else bgRes = 0;
+        if (bgRes != 0) {
+            card.setBackgroundResource(bgRes);
+        } else {
+            card.setBackgroundColor(getColor(R.color.apple_surface));
+        }
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0, 0, 0, 1);
+        params.setMargins(0, 0, 0, isLast ? 0 : 1);
         card.setLayoutParams(params);
 
-        // 状态图标
+        // 状态图标（已解锁/未解锁）
         TextView icon = new TextView(this);
         icon.setText(a.unlocked ? "✓" : "—");
         icon.setTextSize(18);
