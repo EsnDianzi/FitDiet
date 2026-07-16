@@ -134,20 +134,45 @@
             android:background="@drawable/bg_apple_card" />
 
         <!-- ═══ 训练历史 ═══ -->
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="训练历史"
-            android:textColor="@color/apple_text_primary"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:letterSpacing="-0.01"
-            android:drawableStart="@drawable/ic_fitness_center"
-            android:drawableTint="@color/apple_accent"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="训练历史"
+                android:textColor="@color/apple_text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.01"
+                android:drawableStart="@drawable/ic_fitness_center"
+                android:drawableTint="@color/apple_accent"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/btnAchievements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成就勋章"
+                android:textColor="@color/apple_accent"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.01"
+                android:drawableEnd="@drawable/ic_emoji_events"
+                android:drawableTint="@color/apple_accent"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:background="@drawable/bg_battle_muscle"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/exerciseContainer"

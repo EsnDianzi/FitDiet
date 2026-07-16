@@ -91,6 +91,10 @@ public class SummaryRepository {
         summary.dailyActivityCalories = dailyActivity;
         summary.totalBurned = totalBurned;
         summary.netCalories = summary.intakeCalories - totalBurned;
+        // 保留已有的体重快照，避免 refreshForDate() 覆盖历史体重点导致曲线丢失
+        if (existing != null && existing.weightKg != null && existing.weightKg > 0) {
+            summary.weightKg = existing.weightKg;
+        }
         summary.updatedAt = System.currentTimeMillis();
         return summary;
     }

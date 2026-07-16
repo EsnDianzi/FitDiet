@@ -1,6 +1,7 @@
 package com.esn.fitdiet.ui.battle;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -468,7 +469,12 @@ public class BattleActivity extends AppCompatActivity {
 
         new AlertDialog.Builder(this)
                 .setView(view)
-                .setPositiveButton("返回首页", (d, w) -> finish())
+                .setPositiveButton("返回首页", (d, w) -> {
+                    Intent intent = new Intent(this, com.esn.fitdiet.ui.home.HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
+                    finish();
+                })
                 .setCancelable(false)
                 .show();
     }

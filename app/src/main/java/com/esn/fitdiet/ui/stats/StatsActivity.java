@@ -1,5 +1,6 @@
 package com.esn.fitdiet.ui.stats;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -13,6 +14,7 @@ import com.esn.fitdiet.data.local.entity.ExerciseLog;
 import com.esn.fitdiet.data.local.entity.LevelProgress;
 import com.esn.fitdiet.data.repository.StatsRepository;
 import com.esn.fitdiet.databinding.ActivityStatsBinding;
+import com.esn.fitdiet.ui.achievements.AchievementsActivity;
 import com.esn.fitdiet.ui.custom.WeightChartView;
 import com.esn.fitdiet.util.AppExecutors;
 
@@ -75,6 +77,10 @@ public class StatsActivity extends AppCompatActivity {
 
         // 绑定底部导航栏
         com.esn.fitdiet.ui.common.BottomNavHelper.bind(this, findViewById(R.id.navBar));
+
+        // 成就勋章入口
+        binding.btnAchievements.setOnClickListener(v ->
+                startActivity(new Intent(this, AchievementsActivity.class)));
     }
 
     /** 渲染训练历史列表。空列表显示提示语。 */
