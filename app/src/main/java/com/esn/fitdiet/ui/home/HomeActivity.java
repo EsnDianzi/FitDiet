@@ -101,8 +101,8 @@ public class HomeActivity extends AppCompatActivity {
                         "%.0f kcal", summary.netCalories));
                 binding.tvIntake.setText(String.format(Locale.getDefault(),
                         "摄入 %.0f", summary.intakeCalories));
-                binding.tvBurned.setText(String.format(Locale.getDefault(),
-                        "消耗 %.0f", summary.totalBurned));
+                binding.tvBmr.setText(String.format(Locale.getDefault(),
+                        "基础代谢 %.0f", summary.bmrCalories));
             } else {
                 binding.tvNetCalories.setText(R.string.home_no_summary);
             }

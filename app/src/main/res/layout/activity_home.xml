@@ -103,12 +103,12 @@
                         android:letterSpacing="-0.01" />
 
                     <TextView
-                        android:id="@+id/tvBurned"
+                        android:id="@+id/tvBmr"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="消耗 --"
-                        android:textColor="@color/apple_danger"
+                        android:text="基础代谢 --"
+                        android:textColor="@color/apple_text_secondary"
                         android:textSize="13sp"
                         android:letterSpacing="-0.01"
                         android:gravity="end" />
